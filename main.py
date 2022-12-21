@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from post import Post
 import requests
 
+#Connect to API to get all posts
 API = "https://api.npoint.io/d6281a1edce99b4598cf"
 respone = requests.get(API).json()
 all_posts= []
