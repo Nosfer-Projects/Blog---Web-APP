@@ -2,13 +2,17 @@ from flask import Flask, render_template
 from post import Post
 import requests
 
-#Connect to API to get all posts
 API = "https://api.npoint.io/d6281a1edce99b4598cf"
 respone = requests.get(API).json()
-all_posts= []
-for post in respone:
-    post_object = Post(post["id"], post["title"], post["subtitle"], post["body"])
-    all_posts.append(post_object)
+
+def post_to_flask_app(respone):
+    all_posts= []
+    for post in respone:
+        post_object = Post(post["id"], post["title"], post["subtitle"], post["body"])
+        all_posts.append(post_object)
+    return all_posts
+
+all_posts= post_to_flask_app(respone)
 
 app = Flask(__name__)
 
